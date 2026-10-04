@@ -1,0 +1,18 @@
+services:
+  pico-walk:
+    container_name: pico-walk
+    build: .
+    image: pico-walk
+    restart: unless-stopped
+    network_mode: host
+#    ports:
+#      - 16230:16230
+#      - 16231:16231
+
+  caddy:
+    container_name: caddy
+    image: caddy
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro

@@ -1,0 +1,19 @@
+{
+  local_certs
+  auto_https disable_redirects
+  ocsp_stapling off
+}
+
+:1623 {
+  @websockets {
+    header Connection *Upgrade*
+    header Upgrade    websocket
+  }
+  reverse_proxy @websockets localhost:16230
+
+  reverse_proxy localhost:16231
+#  bind 0.0.0.0
+  tls internal {
+    on_demand
+  }
+}
